@@ -4,7 +4,8 @@ import sqlite3
 
 def main():
     connection = create_connection("database.db")
-    create_tables(connection)
+    setup_database(connection)
+    connection.close()
 
     app = MainApp()
     app.geometry("800x400")
