@@ -4,7 +4,7 @@ from app.db import *
 
 class UserManager:
     def __init__(self):
-        self.connection = create_connection()
+        self.connection = create_connection("database.db")
         self.cursor = self.connection.cursor()
     
     def create_new_user(self, username, password):

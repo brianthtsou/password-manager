@@ -1,7 +1,7 @@
 import sqlite3
 
 def create_connection(db_file):
-    connection = sqlite3.connect("database.db")
+    connection = sqlite3.connect(db_file)
     print(f"Connected to {db_file}!")
     return connection
 

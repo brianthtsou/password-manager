@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+from app.user_manager import *
 
 class CreateNewUserPage(tk.Frame):
     def __init__(self, master):
@@ -44,6 +45,10 @@ class CreateNewUserPage(tk.Frame):
         if (password != reenter_password):
             messagebox.showerror(title="Password Error", message="Passwords do not match!")
             return
+        
+        user_manager = UserManager()
+        user_manager.create_new_user(username, password)
+        user_manager.close_connection()
         
         messagebox.showinfo(title="Success", message="New user successfully created!")
 
