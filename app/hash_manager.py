@@ -1,7 +1,7 @@
 import bcrypt
 
-class Encryption:
-    def encrypt_password(password):
+class HashManager:
+    def hash_password(password):
         # Ensure the password is bytes
         if isinstance(password, str):
             password = password.encode('utf-8')

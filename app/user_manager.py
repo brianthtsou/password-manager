@@ -1,5 +1,5 @@
 import sqlite3
-from app.encryption import *
+from app.hash_manager import *
 from app.db import *
 
 class UserManager:
@@ -8,7 +8,7 @@ class UserManager:
         self.cursor = self.connection.cursor()
     
     def create_new_user(self, username, password):
-        hashed_password = Encryption.encrypt_password(password)
+        hashed_password = HashManager.hash_password(password)
         self.cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, hashed_password))
         self.connection.commit()
 
@@ -20,7 +20,7 @@ class UserManager:
             return False
         hashed_password = result[0]
 
-        return Encryption(password, hashed_password)
+        return HashManager(password, hashed_password)
     
     def close_connection(self):
         self.connection.close()
