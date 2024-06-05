@@ -13,14 +13,14 @@ class UserManager:
         self.connection.commit()
 
     def validate_user_login(self, username, password):
-        self.cursor.execute("SELECT password FROM users WHERE username = ?", (username))
+        self.cursor.execute("SELECT password FROM users WHERE username = (?)", (username, ))
         result = self.cursor.fetchone()
         if result is None:
             print("Did not find user with the given username.")
             return False
         hashed_password = result[0]
 
-        return HashManager(password, hashed_password)
+        return HashManager.validate_password(password, hashed_password)
     
     def close_connection(self):
         self.connection.close()
