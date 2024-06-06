@@ -16,6 +16,7 @@ class MainApp(ctk.CTk):
         new_page = PageFactory.create_page(
             page_name, self
         )  # instantiating a new page of the given parameter of page_name
+
         if self._page is not None:
             self._page.destroy()
         self._page = new_page
