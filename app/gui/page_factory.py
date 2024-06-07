@@ -13,6 +13,7 @@ class PageFactory:
 
     def create_page(page_name, master):
         if page_name in page_dict:
-            return page_dict[page_name](master)
+            page_object = page_dict[page_name](master)
+            return page_object.parent_frame
         else:
             raise ValueError(f"Unknown page name: {page_name}")

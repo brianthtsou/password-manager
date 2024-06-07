@@ -19,5 +19,6 @@ class MainApp(ctk.CTk):
 
         if self._page is not None:
             self._page.destroy()
+
         self._page = new_page
         self._page.pack(expand=True, fill="both")

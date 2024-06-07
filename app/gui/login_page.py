@@ -8,7 +8,8 @@ from PIL import ImageTk, Image
 
 class LoginPage(ctk.CTkFrame):
     def __init__(self, master):
-        parent_frame = ctk.CTkFrame.__init__(self, master)
+        super().__init__(master)
+        self.parent_frame = self
 
         icon_image = ctk.CTkImage(
             light_image=Image.open("password-manager-icon.png"),
@@ -16,11 +17,11 @@ class LoginPage(ctk.CTkFrame):
             size=(200, 200),
         )
 
-        image_label = ctk.CTkLabel(parent_frame, image=icon_image, text="")
+        image_label = ctk.CTkLabel(self, image=icon_image, text="")
 
         image_label.pack(pady=20)
 
-        login_field_frame = ctk.CTkFrame(parent_frame)
+        login_field_frame = ctk.CTkFrame(self)
         login_field_frame.grid_columnconfigure(0, weight=1)
 
         username_label = ctk.CTkLabel(login_field_frame, text="Username:", padx=20)
@@ -34,10 +35,12 @@ class LoginPage(ctk.CTkFrame):
 
         username_entry = ctk.CTkEntry(login_field_frame, textvariable=self.username_var)
         username_entry.grid(column=1, row=0)
-        password_entry = ctk.CTkEntry(login_field_frame, textvariable=self.password_var)
+        password_entry = ctk.CTkEntry(
+            login_field_frame, show="*", textvariable=self.password_var
+        )
         password_entry.grid(column=1, row=1)
 
-        login_button = ctk.CTkButton(
+        ctk.CTkButton(
             login_field_frame, text="Login", command=lambda: self.login(master)
         ).grid(row=2, column=0, columnspan=2, pady=5)
 
@@ -70,7 +73,7 @@ class LoginPage(ctk.CTkFrame):
         user_manager = UserManager()
         if user_manager.validate_user_login(username, password):
             user_manager.close_connection()
-            master.switch_frame("MainPage")
+            master.switch_page("MainPage")
         else:
             messagebox.showerror(
                 title="Login Error", message="Incorrect credentials, please try again!"
