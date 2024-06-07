@@ -1,43 +1,56 @@
 import tkinter as tk
+import customtkinter as ctk
 from tkinter import messagebox
 from app.user_manager import *
 
 
-class CreateNewUserPage(tk.Frame):
+class CreateNewUserPage(ctk.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
         self.parent_frame = self
-        tk.Label(self, text="Enter in a new username and password:").grid(
-            row=0, column=0, columnspan=2, sticky="EW", pady=50, padx=10
+
+        # form_frame = ctk.CTkFrame(self)
+        # form_frame.grid_columnconfigure(0, weight=1)
+        # form_frame.pack()
+
+        ctk.CTkLabel(self, text="Enter in a new username and password:").grid(
+            row=0, column=0, pady=10, columnspan=3
         )
-        tk.Button(
-            self, text="Create", width=15, command=lambda: self.submit(master)
-        ).grid(row=4, column=0, columnspan=2, pady=10)
-        tk.Button(
-            self, text="Back", width=8, command=lambda: master.switch_frame("LoginPage")
-        ).grid(row=5, column=0, columnspan=2)
-
-        username_label = tk.Label(self, text="Username:")
-        password_label = tk.Label(self, text="Password:")
-        reenter_password_label = tk.Label(self, text="Re-enter your password:")
-
-        username_label.grid(row=1, column=0, pady=10)
-        password_label.grid(row=2, column=0, pady=10)
-        reenter_password_label.grid(row=3, column=0, pady=10)
 
         self.username_var = tk.StringVar()
         self.password_var = tk.StringVar()
         self.reenter_password_var = tk.StringVar()
 
-        username_entry = tk.Entry(self, textvariable=self.username_var)
-        password_entry = tk.Entry(self, show="*", textvariable=self.password_var)
-        reenter_password_entry = tk.Entry(
-            self, show="*", textvariable=self.reenter_password_var
+        username_label = ctk.CTkLabel(self, text="Username:").grid(
+            row=1, column=1, pady=15
         )
+        username_entry = ctk.CTkEntry(self, textvariable=self.username_var).grid(
+            row=1, column=2, pady=15, padx=5
+        )
+        password_label = ctk.CTkLabel(self, text="Password:").grid(
+            row=2, column=1, pady=15
+        )
+        password_entry = ctk.CTkEntry(
+            self, show="*", textvariable=self.password_var
+        ).grid(row=2, column=2, pady=15, padx=5)
 
-        username_entry.grid(row=1, column=1, pady=10)
-        password_entry.grid(row=2, column=1, pady=10)
-        reenter_password_entry.grid(row=3, column=1, pady=10)
+        reenter_password_label = ctk.CTkLabel(
+            self, text="Re-enter your password:"
+        ).grid(row=3, column=1, pady=15)
+
+        reenter_password_entry = ctk.CTkEntry(
+            self, show="*", textvariable=self.reenter_password_var
+        ).grid(row=3, column=2, pady=15, padx=5)
+
+        ctk.CTkButton(
+            self, text="Create", width=15, command=lambda: self.submit(master)
+        ).grid(row=4, column=1, columnspan=2)
+        ctk.CTkButton(
+            self,
+            text="Back",
+            width=8,
+            command=lambda: master.switch_page("LoginPage"),
+        ).grid(row=5, column=1, columnspan=2, pady=5)
 
     def submit(self, master):
         username = self.username_var.get()
@@ -70,4 +83,4 @@ class CreateNewUserPage(tk.Frame):
 
         messagebox.showinfo(title="Success", message="New user successfully created!")
 
-        master.switch_frame("LoginPage")
+        master.switch_page("LoginPage")

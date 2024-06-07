@@ -19,9 +19,9 @@ class LoginPage(ctk.CTkFrame):
 
         image_label = ctk.CTkLabel(self, image=icon_image, text="")
 
-        image_label.pack(pady=20)
+        image_label.pack(side="top")
 
-        login_field_frame = ctk.CTkFrame(self)
+        login_field_frame = ctk.CTkFrame(self, width=400, height=300)
         login_field_frame.grid_columnconfigure(0, weight=1)
 
         username_label = ctk.CTkLabel(login_field_frame, text="Username:", padx=20)
@@ -51,6 +51,7 @@ class LoginPage(ctk.CTkFrame):
         ).grid(row=3, column=0, columnspan=2, pady=5)
 
         login_field_frame.pack(side="bottom")
+        login_field_frame.pack(fill="none", expand=True)
 
     def login(self, master):
         username = self.username_var.get()
