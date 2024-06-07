@@ -9,10 +9,6 @@ class CreateNewUserPage(ctk.CTkFrame):
         super().__init__(master)
         self.parent_frame = self
 
-        # form_frame = ctk.CTkFrame(self)
-        # form_frame.grid_columnconfigure(0, weight=1)
-        # form_frame.pack()
-
         ctk.CTkLabel(self, text="Enter in a new username and password:").grid(
             row=0, column=0, pady=10, columnspan=3
         )
