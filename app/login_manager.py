@@ -27,5 +27,11 @@ class LoginManager:
             print("No user_id found!")
             return None
 
+    def fetch_logins(self, active_user):
+        user_id = self.get_active_user_id(active_user)
+        self.cursor.execute("SELECT * FROM logins WHERE user_id = (?)", (user_id,))
+        logins = self.cursor.fetchall()
+        print(logins)
+
     def close_connection(self):
         self.connection.close()
