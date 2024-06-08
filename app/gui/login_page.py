@@ -74,7 +74,7 @@ class LoginPage(ctk.CTkFrame):
         user_manager = UserManager()
         if user_manager.validate_user_login(username, password):
             user_manager.close_connection()
-            master.switch_page("MainPage")
+            master.start_active_user_instance(username=username, page_name="MainPage")
         else:
             messagebox.showerror(
                 title="Login Error", message="Incorrect credentials, please try again!"

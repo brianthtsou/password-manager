@@ -8,6 +8,7 @@ class MainApp(ctk.CTk):
     def __init__(self):
         super().__init__()
         self._page = None
+        self._active_user = None
         self.switch_page("LoginPage")
 
     """Method to destroy the current page, replacing it with another; main way to switch between screens on the app."""
@@ -22,3 +23,7 @@ class MainApp(ctk.CTk):
 
         self._page = new_page
         self._page.pack(expand=True, fill="both")
+
+    def start_active_user_instance(self, username, page_name):
+        self._active_user = username
+        self.switch_page(page_name)

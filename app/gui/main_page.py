@@ -6,6 +6,7 @@ class MainPage(ctk.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
         self.parent_frame = self
+        ctk.CTkLabel(self, text=master._active_user).pack(side="top")
         ctk.CTkButton(
             self,
             text="Go to the Start Page",
