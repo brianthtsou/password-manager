@@ -1,6 +1,7 @@
 from app.gui.login_page import LoginPage
 from app.gui.main_page import MainPage
 from app.gui.create_new_user_page import CreateNewUserPage
+from app.gui.create_new_login_page import CreateNewLoginPage
 
 
 class PageFactory:
@@ -9,6 +10,7 @@ class PageFactory:
         "LoginPage": LoginPage,
         "MainPage": MainPage,
         "CreateNewUserPage": CreateNewUserPage,
+        "CreateNewLoginPage": CreateNewLoginPage,
     }
 
     def create_page(page_name, master):
