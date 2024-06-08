@@ -1,6 +1,7 @@
 import tkinter as tk
 import customtkinter as ctk
 from tkinter import messagebox
+from app.login_manager import *
 
 
 class CreateNewLoginPage(ctk.CTkFrame):
@@ -33,6 +34,10 @@ class CreateNewLoginPage(ctk.CTkFrame):
     def submit(self, master):
         username = self.username_var.get()
         password = self.password_var.get()
+
+        login_manager = LoginManager()
+        login_manager.create_new_login(1, username, password)
+        login_manager.close_connection()
 
         messagebox.showinfo(title="Success", message="New login successfully created!")
 
