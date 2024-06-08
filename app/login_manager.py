@@ -29,7 +29,10 @@ class LoginManager:
 
     def fetch_logins(self, active_user):
         user_id = self.get_active_user_id(active_user)
-        self.cursor.execute("SELECT * FROM logins WHERE user_id = (?)", (user_id,))
+        self.cursor.execute(
+            "SELECT login_username, login_password, login_website FROM logins WHERE user_id = (?)",
+            (user_id,),
+        )
         logins = self.cursor.fetchall()
         print(logins)
 
