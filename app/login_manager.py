@@ -8,12 +8,24 @@ class LoginManager:
         self.connection = create_connection("database.db")
         self.cursor = self.connection.cursor()
 
-    def create_new_login(self, user_id, username, password):
+    def create_new_login(self, user_id, login_username, login_password, login_website):
         self.cursor.execute(
-            "INSERT INTO logins (user_id, username, password) VALUES (?, ?, ?)",
-            (user_id, username, password),
+            "INSERT INTO logins (user_id, login_username, login_password, login_website) VALUES (?, ?, ?, ?)",
+            (user_id, login_username, login_password, login_website),
         )
         self.connection.commit()
+
+    def get_active_user_id(self, active_user):
+        self.cursor.execute(
+            "SELECT user_id FROM users WHERE username = (?)", (active_user,)
+        )
+        user_id = self.cursor.fetchone()
+        if user_id:
+            print(user_id)
+            return user_id[0]
+        else:
+            print("No user_id found!")
+            return None
 
     def close_connection(self):
         self.connection.close()
