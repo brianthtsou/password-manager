@@ -35,6 +35,7 @@ class LoginManager:
         )
         logins = self.cursor.fetchall()
         print(logins)
+        return logins
 
     def close_connection(self):
         self.connection.close()
